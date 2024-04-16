@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "firebase": "firebase emulators:start --import=./local --export-on-exit"
   },
   "dependencies": {
     "@unocss/reset": "^0.58.4",

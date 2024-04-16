@@ -1,7 +1,11 @@
 html {
-  font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
 }
 
-body {
+/* body {
   @apply bg-gray-700 text-white;
+} */
+
+body {
+  @apply bg-gray-700;
 }
