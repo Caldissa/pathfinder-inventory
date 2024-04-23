@@ -4,3 +4,7 @@
         <div></div>
     </div>
 </template>
+
+<script setup lang="ts">
+import router from '../router'
+</script>
