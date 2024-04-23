@@ -23,7 +23,6 @@
                         "
                     >
                         <p>HOME</p>
-                        <!-- <i class="i-mdi:home w-8 h-8"></i> -->
                     </button>
 
                     <div
@@ -36,19 +35,39 @@
                         "
                     >
                         <p>ATTENDANCE</p>
-                        <!-- <i class="i-mdi:home w-8 h-8"></i> -->
                     </div>
                     <div
                         class="p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        @click="
+                            () => {
+                                open = false
+                                $router.push('/attendance/view')
+                            }
+                        "
+                    >
+                        <p>VIEW STATS</p>
+                    </div>
+                    <div
+                        class="p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        @click="
+                            () => {
+                                open = false
+                                $router.push('/attendance/create')
+                            }
+                        "
                     >
                         <p>CREATE LOG</p>
-                        <!-- <i class="i-mdi:home w-8 h-8"></i> -->
                     </div>
                     <div
                         class="p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        @click="
+                            () => {
+                                open = false
+                                $router.push('/attendance/edit')
+                            }
+                        "
                     >
                         <p>EDIT ROSTER</p>
-                        <!-- <i class="i-mdi:home w-8 h-8"></i> -->
                     </div>
                 </div>
             </div>
