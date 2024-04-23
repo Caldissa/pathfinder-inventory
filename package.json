@@ -12,7 +12,8 @@
   "dependencies": {
     "@unocss/reset": "^0.58.4",
     "firebase": "^10.11.0",
-    "vue": "^3.3.11"
+    "vue": "^3.3.11",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.176",
