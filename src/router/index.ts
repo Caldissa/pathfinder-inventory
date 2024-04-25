@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router'
+import { auth } from '../firebase'
 
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
@@ -21,21 +22,12 @@ const router = createRouter({
     routes
 })
 
-// router.beforeEach((to, _from, next) => {
-//     if (to.path === '/login') {
-//         return next()
-//     }
-//     const email = sessionStorage.getItem('ss_email')
-//     const timestamp = sessionStorage.getItem('ss_date')
-//     if (!email || !timestamp) {
-//         return next('/login')
-//     }
-//     if (dayjs().diff(dayjs(timestamp), 'hour') < -23) {
-//         sessionStorage.removeItem('ss_email')
-//         sessionStorage.removeItem('ss_date')
-//         return next('/login')
-//     }
-//     next()
-// })
+router.beforeEach(async (to, _from, next) => {
+    await auth.authStateReady()
+    if (!auth.currentUser && to.path != '/login') {
+        return next('/login')
+    }
+    next()
+})
 
 export default router

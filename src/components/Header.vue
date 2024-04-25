@@ -5,10 +5,11 @@
         <RouterLink to="/">
             <h1 class="text-5xl tracking-widest">PRM</h1>
         </RouterLink>
-        <div><Sidebar /></div>
+        <div v-if="router.currentRoute.value.path != '/login'"><Sidebar /></div>
     </div>
 </template>
 
 <script setup lang="ts">
 import Sidebar from './Sidebar.vue'
+import router from '../router'
 </script>
