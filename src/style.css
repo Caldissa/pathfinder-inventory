@@ -11,7 +11,7 @@ html {
 }
 
 .button.secondary {
-    @apply bg-sky-300 hover:bg-sky-300 text-white disabled:bg-gray-500 transition-colors duration-300 disabled:opacity-50;
+    @apply bg-sky-300 hover:bg-sky-500 text-white disabled:bg-gray-500 transition-colors duration-300 disabled:opacity-50;
 }
 
 .button.sidebar {
