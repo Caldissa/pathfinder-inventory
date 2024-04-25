@@ -38,22 +38,22 @@
                         @click="
                             () => {
                                 open = false
-                                $router.push('/attendance/view')
+                                $router.push('/attendance/create')
                             }
                         "
                     >
-                        <p>VIEW STATS</p>
+                        <p>CREATE LOG</p>
                     </button>
                     <button
                         class="button sidebar p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
                         @click="
                             () => {
                                 open = false
-                                $router.push('/attendance/create')
+                                $router.push('/attendance/view')
                             }
                         "
                     >
-                        <p>CREATE LOG</p>
+                        <p>VIEW STATS</p>
                     </button>
                     <button
                         class="button sidebar p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
