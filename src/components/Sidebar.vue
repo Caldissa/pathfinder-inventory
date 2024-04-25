@@ -69,6 +69,14 @@
                     >
                         <p>EDIT ROSTER</p>
                     </div>
+
+                    <div
+                        class="p-4 flex gap-2 items-center justify-start border-b border-black text-xl font-semibold"
+                        @click="logout"
+                    >
+                        <p>Sign Out</p>
+                        <i class="i-mdi:logout w-6 h-6"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,6 +85,21 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { auth } from '../firebase'
+import { signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
 
 const open = ref(false)
+const router = useRouter()
+
+const logout = () => {
+    signOut(auth)
+        .then(() => {
+            open.value = false
+            router.push('/login')
+        })
+        .catch((e) => {
+            console.error('Could not sign out: ', e)
+        })
+}
 </script>
