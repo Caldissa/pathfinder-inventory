@@ -27,7 +27,7 @@
             </div>
             <button
                 :disabled="loading"
-                class="button blue rounded-md p-4 text-3xl font-semibold flex gap-2 justify-center items-center text-center"
+                class="button primary p-4 text-3xl font-semibold"
                 @click="login"
             >
                 <p>LOGIN</p>

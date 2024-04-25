@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full h-screen">
+    <div class="w-full h-screen flex flex-col overflow-hidden">
         <Header />
-        <main class="h-full w-full"><RouterView /></main>
+        <main class="w-full h-full overflow-y-scroll"><RouterView /></main>
     </div>
 </template>
 
