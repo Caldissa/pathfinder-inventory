@@ -5,3 +5,7 @@ html {
 .button.blue {
     @apply bg-blue-600 hover:bg-blue-400 text-white disabled:bg-gray-500 transition-colors duration-300 disabled:opacity-50;
 }
+
+.button.sidebar {
+    @apply hover:bg-white/30;
+}
