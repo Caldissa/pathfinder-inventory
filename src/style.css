@@ -14,6 +14,10 @@ html {
     @apply bg-sky-300 hover:bg-sky-500 text-white disabled:bg-gray-500 transition-colors duration-300 disabled:opacity-50;
 }
 
+.button.disabled {
+    @apply text-white bg-gray-500 opacity-50;
+}
+
 .button.sidebar {
     @apply hover:bg-white/30;
 }
