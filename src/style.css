@@ -21,3 +21,16 @@ html {
 .button.sidebar {
     @apply hover:bg-white/30;
 }
+
+.row {
+    @apply grid grid-cols-[1fr_auto] border-y-1 border-black;
+}
+
+.cell {
+    @apply p-[0.375rem] border-x-1 border-black flex items-center;
+}
+
+input[type="number" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+}

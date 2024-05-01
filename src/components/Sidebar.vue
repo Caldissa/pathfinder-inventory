@@ -11,7 +11,7 @@
             <div class="h-full w-min bg-blue-900 text-white grid">
                 <div class="grid grid-col mb-auto">
                     <button
-                        class="button sidebar p-4 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        class="button sidebar !rounded-0 p-4 flex items-center justify-start border-b border-black text-xl font-semibold"
                         @click="
                             () => {
                                 open = false
@@ -23,7 +23,7 @@
                     </button>
 
                     <button
-                        class="button sidebar p-4 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        class="button sidebar !rounded-0 p-4 flex items-center justify-start border-b border-black text-xl font-semibold"
                         @click="
                             () => {
                                 open = false
@@ -34,18 +34,18 @@
                         <p>ATTENDANCE</p>
                     </button>
                     <button
-                        class="button sidebar p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        class="button sidebar !rounded-0 p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
                         @click="
                             () => {
                                 open = false
-                                $router.push('/attendance/create')
+                                $router.push('/attendance/create-log')
                             }
                         "
                     >
                         <p>CREATE LOG</p>
                     </button>
                     <button
-                        class="button sidebar p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        class="button sidebar !rounded-0 p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
                         @click="
                             () => {
                                 open = false
@@ -56,7 +56,7 @@
                         <p>VIEW STATS</p>
                     </button>
                     <button
-                        class="button sidebar p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
+                        class="button sidebar !rounded-0 p-4 bg-black/20 flex items-center justify-start border-b border-black text-xl font-semibold"
                         @click="
                             () => {
                                 open = false
@@ -68,7 +68,7 @@
                     </button>
 
                     <button
-                        class="button sidebar p-4 flex gap-2 items-center justify-start border-b border-black text-xl font-semibold"
+                        class="button sidebar !rounded-0 p-4 flex gap-2 items-center justify-start border-b border-black text-xl font-semibold"
                         @click="logout"
                     >
                         <p>Sign Out</p>
