@@ -120,7 +120,7 @@ const test = ref([
     }
 ])
 
-const togglePresence = (p) => {
+const togglePresence = (p: string) => {
     if (p == 'ABSENT') {
         return 'PRESENT'
     } else if (p == 'PRESENT') {
