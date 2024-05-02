@@ -95,6 +95,7 @@ import { db } from '../firebase'
 import { collection, addDoc } from 'firebase/firestore'
 
 const editing = ref(-1)
+const name = ref('')
 const test = ref([
     {
         id: '17435',
