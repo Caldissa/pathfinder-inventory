@@ -88,7 +88,10 @@
                     </div>
                 </div>
             </div>
-            <button class="button secondary py-2 font-semibold">
+            <button
+                class="button secondary py-2 font-semibold"
+                @click="testAdd()"
+            >
                 SUBMIT RECORD
             </button>
         </div>
@@ -97,6 +100,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { db } from '../firebase'
+import { collection, addDoc } from 'firebase/firestore'
 import dayjs from 'dayjs'
 const date = ref(dayjs())
 const test = ref([
@@ -119,6 +124,22 @@ const test = ref([
         bonus: 0
     }
 ])
+
+const testAdd = async () => {
+    try {
+        const docRef = await addDoc(collection(db, 'attendance'), {
+            bible: true,
+            bonus: 3,
+            date: dayjs().format(),
+            dress: true,
+            person_id: 'dKW6HA6y8sZUD7zhBw4K',
+            presence: 'LATE'
+        })
+        console.log('Document written with ID: ', docRef.id)
+    } catch (e) {
+        console.error('Error adding document: ', e)
+    }
+}
 
 const togglePresence = (p: string) => {
     if (p == 'ABSENT') {
