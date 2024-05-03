@@ -18,6 +18,10 @@ html {
     @apply bg-green-300 hover:bg-green-500 text-white disabled:bg-gray-500 transition-colors duration-300 disabled:opacity-50;
 }
 
+.button.red {
+    @apply bg-red-400 hover:bg-red-500 text-white disabled:bg-gray-500 transition-colors duration-300 disabled:opacity-50;
+}
+
 .button.disabled {
     @apply text-white bg-gray-500 opacity-50;
 }
@@ -41,6 +45,13 @@ html {
 input[type="number" i] {
     padding-block: 1px;
     padding-inline: 2px;
+}
+
+input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 select {
