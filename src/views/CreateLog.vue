@@ -29,9 +29,9 @@
                         </div>
                     </div>
                 </div>
-                <div v-for="row in test" :key="row.id" class="row">
+                <div v-for="row in people" :key="row.person_id" class="row">
                     <p class="cell !px-2">
-                        {{ row.firstName }} {{ row.lastName }}
+                        {{ row.first_name }} {{ row.last_name }}
                     </p>
                     <div class="flex">
                         <div class="cell !p-1 justify-center">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="cell justify-center">
                             <input
-                                v-model="row.shirt"
+                                v-model="row.dress"
                                 type="checkbox"
                                 class="w-7 h-7"
                             />
@@ -99,34 +99,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { db } from '../firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, getDocs, addDoc } from 'firebase/firestore'
+import type { PersonRecord } from '../models'
 import dayjs from 'dayjs'
+
+const loading = ref(false)
 const date = ref(dayjs())
-const test = ref([
-    {
-        id: '17435',
-        firstName: 'John',
-        lastName: 'Doe',
-        presence: 'ABSENT',
-        shirt: false,
-        bible: false,
-        bonus: 0
-    },
-    {
-        id: '17445',
-        firstName: 'Jane',
-        lastName: 'Doe',
-        presence: 'ABSENT',
-        shirt: false,
-        bible: false,
-        bonus: 0
-    }
-])
+const people = ref([] as PersonRecord[])
 
 const testAdd = async () => {
     try {
+        console.log('people', people.value)
         const docRef = await addDoc(collection(db, 'attendance'), {
             bible: true,
             bonus: 3,
@@ -150,4 +135,48 @@ const togglePresence = (p: string) => {
         return 'ABSENT'
     }
 }
+
+const sort = () => {
+    people.value.sort(byClass)
+}
+
+const byClass = (a: PersonRecord, b: PersonRecord) => {
+    if (a.class < b.class) {
+        return -1
+    } else if (a.class > b.class) {
+        return 1
+    }
+    // a must be equal to b
+    if (a.first_name < b.first_name) {
+        return -1
+    } else if (a.first_name > b.first_name) {
+        return 1
+    }
+    return 0
+}
+
+onMounted(async () => {
+    loading.value = true
+    people.value = []
+    let results = await getDocs(collection(db, 'people'))
+    results.forEach((doc) => {
+        let d = doc.data()
+        d.id = doc.id
+        if (d.active) {
+            people.value.push({
+                person_id: d.id,
+                first_name: d.first_name,
+                last_name: d.last_name,
+                class: d.class,
+                date: date.value.format(),
+                presence: 'ABSENT',
+                dress: false,
+                bible: false,
+                bonus: 0
+            })
+        }
+    })
+    sort()
+    loading.value = false
+})
 </script>

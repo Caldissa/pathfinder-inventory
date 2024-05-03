@@ -246,7 +246,7 @@
 import { ref, onMounted } from 'vue'
 import { db } from '../firebase'
 import { collection, doc, getDocs, addDoc, updateDoc } from 'firebase/firestore'
-import Person from '../models'
+import type { Person } from '../models'
 
 const loading = ref(false)
 const editingA = ref(-1)
@@ -266,17 +266,29 @@ const inactivePeople = ref([] as Person[])
 
 const toggleEditingA = async (row: Person, index: number) => {
     loading.value = true
-    if (editingA.value == index) {
+    if (editingA.value == index && row) {
         let change = false
         if (name.value != `${row.first_name} ${row.last_name}`) {
             change = true
             let a = name.value.split(' ')
-            row.first_name = a.shift()
-            row.last_name = a.pop()
+            let n = a.shift()
+            if (n) {
+                row.first_name = n
+            }
+            n = a.pop()
+            if (n) {
+                row.last_name = n
+            }
         }
         if (row.class != pClass.value) change = true
         if (change) {
-            await updateDoc(doc(db, 'people', row.id), row)
+            await updateDoc(doc(db, 'people', row.id), {
+                id: row.id,
+                first_name: row.first_name,
+                last_name: row.last_name,
+                class: row.class,
+                active: row.active
+            })
         }
         editingA.value = -1
         sort()
@@ -295,12 +307,24 @@ const toggleEditingI = async (row: Person, index: number) => {
         if (name.value != `${row.first_name} ${row.last_name}`) {
             change = true
             let a = name.value.split(' ')
-            row.first_name = a.shift()
-            row.last_name = a.pop()
+            let n = a.shift()
+            if (n) {
+                row.first_name = n
+            }
+            n = a.pop()
+            if (n) {
+                row.last_name = n
+            }
         }
         if (row.class != pClass.value) change = true
         if (change) {
-            await updateDoc(doc(db, 'people', row.id), row)
+            await updateDoc(doc(db, 'people', row.id), {
+                id: row.id,
+                first_name: row.first_name,
+                last_name: row.last_name,
+                class: row.class,
+                active: row.active
+            })
         }
         editingI.value = -1
         sort()
@@ -319,11 +343,11 @@ const toggleActive = async (row: Person, index: number) => {
         active: !row.active
     })
     if (active) {
-        let p = activePeople.value.splice(index, 1)[0]
+        let p = activePeople.value.splice(index, 1)[0] as Person
         p.active = !active
         inactivePeople.value.push(p)
     } else {
-        let p = inactivePeople.value.splice(index, 1)[0]
+        let p = inactivePeople.value.splice(index, 1)[0] as Person
         p.active = !active
         activePeople.value.push(p)
     }
@@ -361,7 +385,7 @@ const sort = () => {
     inactivePeople.value.sort(byClass)
 }
 
-const byClass = (a, b) => {
+const byClass = (a: Person, b: Person) => {
     if (a.class < b.class) {
         return -1
     } else if (a.class > b.class) {
@@ -385,9 +409,9 @@ onMounted(async () => {
         let d = doc.data()
         d.id = doc.id
         if (d.active) {
-            activePeople.value.push(d)
+            activePeople.value.push(d as Person)
         } else {
-            inactivePeople.value.push(d)
+            inactivePeople.value.push(d as Person)
         }
     })
     sort()
