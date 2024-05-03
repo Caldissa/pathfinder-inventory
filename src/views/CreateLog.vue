@@ -90,7 +90,7 @@
             </div>
             <button
                 class="button secondary py-2 font-semibold"
-                @click="testAdd()"
+                @click="addRecords()"
             >
                 SUBMIT RECORD
             </button>
@@ -109,18 +109,27 @@ const loading = ref(false)
 const date = ref(dayjs())
 const people = ref([] as PersonRecord[])
 
-const testAdd = async () => {
+const addRecords = async () => {
     try {
-        console.log('people', people.value)
-        const docRef = await addDoc(collection(db, 'attendance'), {
-            bible: true,
-            bonus: 3,
-            date: dayjs().format(),
-            dress: true,
-            person_id: 'dKW6HA6y8sZUD7zhBw4K',
-            presence: 'LATE'
+        let f = date.value.format()
+        people.value.forEach(async (row: PersonRecord) => {
+            await addDoc(collection(db, 'attendance'), {
+                bible: row.bible,
+                bonus: row.bonus,
+                date: f,
+                dress: row.dress,
+                person_id: row.person_id,
+                presence: row.presence
+            })
         })
-        console.log('Document written with ID: ', docRef.id)
+        await addDoc(collection(db, 'records'), {
+            date: f,
+            month: date.value.month(),
+            year: date.value.year()
+        })
+        people.value = []
+        set()
+        sort()
     } catch (e) {
         console.error('Error adding document: ', e)
     }
@@ -155,9 +164,7 @@ const byClass = (a: PersonRecord, b: PersonRecord) => {
     return 0
 }
 
-onMounted(async () => {
-    loading.value = true
-    people.value = []
+const set = async () => {
     let results = await getDocs(collection(db, 'people'))
     results.forEach((doc) => {
         let d = doc.data()
@@ -176,6 +183,12 @@ onMounted(async () => {
             })
         }
     })
+}
+
+onMounted(async () => {
+    loading.value = true
+    people.value = []
+    set()
     sort()
     loading.value = false
 })
