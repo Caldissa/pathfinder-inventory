@@ -16,6 +16,12 @@ export interface Record {
     bonus: number
 }
 
+export interface Instance {
+    date: string
+    month: number
+    year: number
+}
+
 export interface PersonRecord {
     id?: string
     person_id: string
